@@ -14,6 +14,42 @@
 
 extern uint8_t graphbmp[];
 
+// SMDLTLFP250T4profile normal temp lead-free profile
+static const profile smdltlfp250t4profile = {
+	"SMDLTLFP250T4", {
+	//    0  10  20	 30  40  50  60  70  80  90 100 110 120 130 140 150
+		 50, 50, 60, 60, 70, 70, 80, 80, 85, 90, 90, 95,100,110,110,110, // 0-150s
+	//  160 170 180 190 200 210 220 230 240 250 260 270 280 290 300 310
+		110,120,125,130,135,140,150,165,165,165,140,135,120,120, 90, 90, // Adjust peak from 230 to 249C
+	//  320 330 340 350 360 370 380 390 400 410 420 430 440 450 460 470
+		 80, 80, 70, 70, 60, 60, 40, 30, 20, 20, 20,  0,  0,  0,  0,  0  // 320-470s
+	}
+};
+
+// SMDLTLFP250T4profile normal temp lead-free profile
+static const profile smd291snl250t3profile = {
+	"SMD291SNL250T3", {
+	//    0  10  20	 30  40  50  60  70  80  90 100 110 120 130 140 150
+		 50, 50, 60, 70, 80, 90,100,130,140,150,158,160,162,165,168,170, // 0-150s
+	//  160 170 180 190 200 210 220 230 240 250 260 270 280 290 300 310
+		170,173,175,190,200,217,150,245,249,230,220,217,200,190,180,170, // Adjust peak from 230 to 249C
+	//  320 330 340 350 360 370 380 390 400 410 420 430 440 450 460 470
+		160,150,140,130,120,110, 90, 80, 70, 60, 50, 40, 30, 20, 20, 0  // 320-470s
+	}
+};
+
+// Kester NXG1 profile
+static const profile nxg1profile = {
+	"Kester NXG1", {
+	//    0  10  20	 30  40  50  60  70  80  90 100 110 120 130 140 150
+		 25, 50, 75,100,125,150,175,175,178,183,185,188,192,195,197,200,
+	//  160 170 180 190 200 210 220 230 240 250 260 270 280 290 300 310
+		205,210,215,220,228,235,238,235,220,200,190,180,170,160,150,140,
+	//  320 330 340 350 360 370 380 390 400 410 420 430 440 450 460 470
+		130,120,110,100, 90, 80, 70, 60, 50, 40, 30, 20,  0,  0,  0, 0
+	}
+};
+
 // Amtech 4300 63Sn/37Pb leaded profile
 static const profile am4300profile = {
 	"4300 63SN/37PB", {
@@ -40,6 +76,8 @@ static const profile syntechlfprofile = {
 		184,177,157,137,117, 97, 77, 57,  0,  0,  0,  0,  0,  0,  0,  0  // 320-470s
 	}
 };
+
+
 
 #ifdef RAMPTEST
 // Ramp speed test temp profile
@@ -70,9 +108,12 @@ static ramprofile ee1 = { "CUSTOM #1" };
 static ramprofile ee2 = { "CUSTOM #2" };
 
 static const profile* profiles[] = {
-	&syntechlfprofile,
-	&nc31profile,
-	&am4300profile,
+	&smdltlfp250t4profile,
+	&smd291snl250t3profile,
+	&nxg1profile,
+//	&syntechlfprofile,
+//	&nc31profile,
+//	&am4300profile,
 #ifdef RAMPTEST
 	&rampspeed_testprofile,
 #endif
